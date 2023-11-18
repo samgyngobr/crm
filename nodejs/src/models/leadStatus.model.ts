@@ -5,7 +5,6 @@ import { messages } from 'joi-translation-pt-br';
 // ##################################################################################
 
 type LeadStatusDocument = Document & {
-    companyId : string;
     title     : string;
     enabled   : boolean;
 };
@@ -13,7 +12,6 @@ type LeadStatusDocument = Document & {
 // ##################################################################################
 
 type LeadStatusInput = {
-    companyId : LeadStatusDocument['companyId'];
     title     : LeadStatusDocument['title'];
     enabled   : LeadStatusDocument['enabled'];
 };
@@ -22,10 +20,6 @@ type LeadStatusInput = {
 
 const leadStatusSchema = new Schema(
     {
-        companyId : {
-            type     : Schema.Types.ObjectId,
-            required : true,
-        },
         title: {
             type     : Schema.Types.String,
             required : true,
@@ -49,7 +43,6 @@ const LeadStatus : Model<LeadStatusDocument> = mongoose.model<LeadStatusDocument
 const createValidation = (body) => {
 
     const schema = Joi.object({
-        companyId : Joi.string().required().label("Company"),
         title     : Joi.string().required().label("Title"),
     });
 

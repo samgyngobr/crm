@@ -5,7 +5,6 @@ import { messages } from 'joi-translation-pt-br';
 // ##################################################################################
 
 type LeadDocument = Document & {
-    companyId    : string;
     teamId       : string;
     unityId      : string;
     leadStatusId : string;
@@ -16,7 +15,6 @@ type LeadDocument = Document & {
 // ##################################################################################
 
 type LeadInput = {
-    companyId    : LeadDocument['companyId'];
     teamId       : LeadDocument['teamId'];
     unityId      : LeadDocument['unityId'];
     leadStatusId : LeadDocument['leadStatusId'];
@@ -28,10 +26,6 @@ type LeadInput = {
 
 const leadSchema = new Schema(
     {
-        companyId : {
-            type     : Schema.Types.ObjectId,
-            required : true,
-        },
         teamId : {
             type     : Schema.Types.ObjectId,
             required : true,
@@ -76,7 +70,6 @@ const Lead : Model<LeadDocument> = mongoose.model<LeadDocument>('Lead', leadSche
 const createValidation = (body) => {
 
     const schema = Joi.object({
-        companyId    : Joi.string().required().label("Company"),
         teamId       : Joi.string().required().label("Team"),
         unityId      : Joi.string().required().label("Unity"),
         leadStatusId : Joi.string().required().label("Status"),
@@ -96,7 +89,6 @@ const createValidation = (body) => {
 const updateValidation = (body) => {
 
     const schema = Joi.object({
-        companyId    : Joi.string().required().label("Company"),
         teamId       : Joi.string().required().label("Team"),
         unityId      : Joi.string().required().label("Unity"),
         leadStatusId : Joi.string().required().label("Status"),

@@ -41,13 +41,14 @@ const login = async (req: Request, res: Response) => {
 
         return res.status(200).json({
             message : "Logged in sucessfully",
+            error   : false,
             user    : {
                 name         : user.name,
                 email        : user.email,
+                image        : user.avatar,
                 roles        : user.role,
                 accessToken  : accessToken,
                 refreshToken : refreshToken,
-                image        : "/assets/img/damir-bosnjak.jpg",
             }
         });
     }

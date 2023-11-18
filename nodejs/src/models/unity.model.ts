@@ -5,7 +5,6 @@ import { messages } from 'joi-translation-pt-br';
 // ##################################################################################
 
 type UnityDocument = Document & {
-    companyId : string;
     title     : string;
     enabled   : boolean;
 };
@@ -13,7 +12,6 @@ type UnityDocument = Document & {
 // ##################################################################################
 
 type UnityInput = {
-    companyId : UnityDocument['companyId'];
     title     : UnityDocument['title'];
     enabled   : UnityDocument['enabled'];
 };
@@ -22,10 +20,6 @@ type UnityInput = {
 
 const unitySchema = new Schema(
     {
-        companyId : {
-            type     : Schema.Types.ObjectId,
-            required : true,
-        },
         title: {
             type     : Schema.Types.String,
             required : true,
@@ -49,7 +43,6 @@ const Unity: Model<UnityDocument> = mongoose.model<UnityDocument>('Unity', unity
 const createValidation = (body) => {
 
     const schema = Joi.object({
-        companyId : Joi.string().required().label("Company"),
         title     : Joi.string().required().label("Title"),
     });
 

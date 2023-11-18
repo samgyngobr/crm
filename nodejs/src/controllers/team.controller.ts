@@ -35,10 +35,6 @@ const createTeam = async (req: Request, res: Response) => {
     try
     {
         const { title, enabled } = req.body;
-
-        let companyId = req.user.companyId
-        
-        req.body.companyId = companyId;  
               
         const { error } = createValidation(req.body);
 
@@ -46,7 +42,6 @@ const createTeam = async (req: Request, res: Response) => {
             throw Error( error.details[0].message );
 
         const teamInput : TeamInput = {
-            companyId,
             title,
             enabled
         };

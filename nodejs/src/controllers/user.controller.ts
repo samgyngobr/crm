@@ -61,12 +61,7 @@ const createUser = async (req: Request, res: Response) => {
 
     try
     {
-        const { email, enabled, name, password, role } = req.body;
-
-        let companyId = req.user.companyId
-        
-        req.body.companyId = companyId;
-
+        const { avatar, email, enabled, name, password, role } = req.body;
         const { error } = createValidation(req.body);
 
         if (error)
@@ -77,12 +72,12 @@ const createUser = async (req: Request, res: Response) => {
         const hashPassword = await bcrypt.hash(password, salt);
 
         const userInput: UserInput = {
-            companyId,
             name,
             email,
             password: hashPassword,
             enabled,
             role,
+            avatar
         };
 
         // create
@@ -146,7 +141,7 @@ const updateUser = async (req: Request, res: Response) => {
     try
     {
         const { id } = req.params;
-        const { enabled, name, role } = req.body;
+        const { avatar, enabled, name, role } = req.body;
 
         // user exists?
         const user = await User.findOne({ _id: id });
@@ -161,7 +156,7 @@ const updateUser = async (req: Request, res: Response) => {
             throw Error( error.details[0].message );
 
         // update
-        await User.updateOne({ _id: id }, { enabled, name, role });
+        await User.updateOne({ _id: id }, { avatar, enabled, name, role });
 
         // get updated data
         const userUpdated = await User.findById(id);

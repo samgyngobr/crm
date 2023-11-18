@@ -41,7 +41,6 @@ const createLeadStatus = async (req: Request, res: Response) => {
             throw Error( error.details[0].message );
 
         const leadStatusInput : LeadStatusInput = {
-            companyId,
             title,
             enabled
         };

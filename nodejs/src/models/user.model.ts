@@ -6,33 +6,29 @@ import { messages } from 'joi-translation-pt-br';
 // ##################################################################################
 
 type UserDocument = Document & {
-    companyId : string;
     name      : string;
     email     : string;
     password  : string;
     enabled   : boolean;
     role      : string;
+    avatar    : string;
 };
 
 // ##################################################################################
 
 type UserInput = {
-    companyId : UserDocument['companyId'];
     name      : UserDocument['name'];
     email     : UserDocument['email'];
     password  : UserDocument['password'];
     enabled   : UserDocument['enabled'];
     role      : UserDocument['role'];
+    avatar    : UserDocument['avatar'];
 };
 
 // ##################################################################################
 
 const usersSchema = new Schema(
     {
-        companyId : {
-            type     : Schema.Types.ObjectId,
-            required : true,
-        },
         name: {
             type     : Schema.Types.String,
             required : true,
@@ -57,6 +53,11 @@ const usersSchema = new Schema(
             required : true,
             index    : true,
         },
+        avatar: {
+            type     : Schema.Types.String,
+            default  : "",
+            required : false,
+        }
     },
     {
         collection : 'users',
@@ -71,12 +72,12 @@ const User: Model<UserDocument> = mongoose.model<UserDocument>('User', usersSche
 const createValidation = (body) => {
 
     const schema = Joi.object({
-        companyId : Joi.string().required().label("Company"),
         name      : Joi.string().required().label("User Name"),
         email     : Joi.string().email().required().label("Email"),
         enabled   : Joi.boolean().required().label("Enabled"),
         role      : Joi.string().required().label("Role"),
         password  : passwordComplexity().required().label("Password"),
+        avatar    : Joi.string().label("User Avatar"),
     });
 
     return schema.validate(body, { messages });
@@ -90,6 +91,7 @@ const updateValidation = (body) => {
         name    : Joi.string().required().label("User Name"),
         role    : Joi.string().required().label("Role"),
         enabled : Joi.boolean().required().label("Enabled"),
+        avatar  : Joi.string().label("Avatar"),
     });
 
     return schema.validate(body, { messages });

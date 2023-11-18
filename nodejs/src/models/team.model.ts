@@ -5,7 +5,6 @@ import { messages } from 'joi-translation-pt-br';
 // ##################################################################################
 
 type TeamDocument = Document & {
-    companyId : string;
     title     : string;
     enabled   : boolean;
 };
@@ -13,7 +12,6 @@ type TeamDocument = Document & {
 // ##################################################################################
 
 type TeamInput = {
-    companyId : TeamDocument['companyId'];
     title     : TeamDocument['title'];
     enabled   : TeamDocument['enabled'];
 };
@@ -22,10 +20,6 @@ type TeamInput = {
 
 const teamSchema = new Schema(
     {
-        companyId : {
-            type     : Schema.Types.ObjectId,
-            required : true,
-        },
         title: {
             type     : Schema.Types.String,
             required : true,
@@ -49,7 +43,6 @@ const Team: Model<TeamDocument> = mongoose.model<TeamDocument>('Team', teamSchem
 const createValidation = (body) => {
 
     const schema = Joi.object({
-        companyId : Joi.string().required().label("Company"),
         title     : Joi.string().required().label("Title"),
         enabled   : Joi.boolean().required().label("Enabled"),
     });

@@ -34,14 +34,13 @@ const createUnity = async (req: Request, res: Response) => {
 
     try
     {
-        const { companyId, title, enabled } = req.body;
+        const { title, enabled } = req.body;
         const { error } = createValidation(req.body);
 
         if (error)
             throw Error( error.details[0].message );
 
         const unityInput : UnityInput = {
-            companyId,
             title,
             enabled
         };

@@ -7,7 +7,6 @@ import { connectToDatabase } from './utils/databaseConnection';
 import { roleRoute       } from './routes/role.route';
 import { userRoute       } from './routes/user.route';
 import { authRoute       } from './routes/auth.route';
-import { companyRoute    } from './routes/company.route';
 import { teamRoute       } from './routes/team.route';
 import { unityRoute      } from './routes/unity.route';
 import { leadStatusRoute } from './routes/leadStatus.route';
@@ -27,7 +26,6 @@ app.use(cors())
 app.use( '/', roleRoute()       );
 app.use( '/', userRoute()       );
 app.use( '/', authRoute()       );
-app.use( '/', companyRoute()    );
 app.use( '/', teamRoute()       );
 app.use( '/', unityRoute()      );
 app.use( '/', leadStatusRoute() );

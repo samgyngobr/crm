@@ -10,7 +10,6 @@ const getAllLeads = async (req: Request, res: Response) => {
 
     try
     {
-        
         const status = await Lead
             .find()
             .sort('-createdAt')
@@ -35,14 +34,13 @@ const createLead = async (req: Request, res: Response) => {
 
     try
     {
-        const { companyId, teamId, unityId, leadStatusId, enabled, interactions } = req.body;
+        const { teamId, unityId, leadStatusId, enabled, interactions } = req.body;
         const { error } = createValidation(req.body);
 
         if (error)
             throw Error( error.details[0].message );
 
         const leadInput : LeadInput = {
-            companyId,
             teamId,
             unityId,
             leadStatusId,
