@@ -1,0 +1,14 @@
+
+<mat-drawer-container class="" autosize >
+
+    <mat-drawer #drawer class="" mode="over" >
+        <app-pipe-details></app-pipe-details>
+    </mat-drawer>
+
+    <div class="content-np">
+        <section class="lists-container">
+            <app-pipe-column *ngFor="let col of columns" [col]="col" ></app-pipe-column>
+        </section>
+    </div>
+
+</mat-drawer-container>

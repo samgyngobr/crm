@@ -1,0 +1,46 @@
+
+<div class=" details p-5">
+
+    <h5 class="mb-2">{{ id ? 'Update' : 'New' }} Team</h5>
+
+    <hr>
+
+    <form [formGroup]="_form" (ngSubmit)="onSubmit()" class="d-flex flex-column" >
+
+        <div class="alert alert-danger" role="alert" *ngIf="error!=''" >
+          {{error}}
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Title" formControlName="title" required >
+            <mat-error *ngIf="_form.get('name')?.errors?.['required']">
+                Title required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="d-flex">
+            <mat-radio-group aria-label="Select an option" formControlName="enabled" color="primary" >
+              <mat-radio-button [value]="true"  >Enabled</mat-radio-button>
+              <mat-radio-button [value]="false" >Disabled</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div><hr></div>
+
+        <div class="d-flex justify-content-between">
+
+            <button mat-raised-button extended color="primary" class="submit-button" aria-label="Sign in" [disabled]="_form.invalid" *ngIf="!loading" >
+                Send
+            </button>
+
+            <button mat-raised-button extended color="primary" aria-label="Loading..." disabled *ngIf="loading" >
+                Loading...
+            </button>
+
+            <button mat-raised-button extended color="accent" (click)="close()" >Cancel</button>
+        </div>
+
+    </form>
+
+</div>

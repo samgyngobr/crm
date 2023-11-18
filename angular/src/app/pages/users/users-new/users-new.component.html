@@ -1,0 +1,119 @@
+
+<div class=" details p-5">
+
+    <h5 class="mb-2">New User</h5>
+
+    <hr>
+
+    <form [formGroup]="_form" (ngSubmit)="onSubmit()" class="d-flex flex-column" >
+
+        <div class="alert alert-danger" role="alert" *ngIf="error!=''" >
+          {{error}}
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name"  required >
+            <mat-error *ngIf="_form.get('name')?.errors?.['required']">
+                Name required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email"  required >
+            <mat-error *ngIf="_form.get('email')?.errors?.['required']">
+                Email required
+            </mat-error>
+            <mat-error
+                *ngIf="!_form.get('email')?.errors?.['required'] &&
+                        _form.get('email')?.errors?.['email']">
+                Invalid Email
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Password" formControlName="password" maxlength="18" minlength="6" required >
+            <mat-error *ngIf="_form.controls['password'].errors">
+              <span class="text-danger" *ngIf="_form.controls['password'].hasError('minlength') || 
+                      _form.controls['password'].hasError('hasNumber') || 
+                      _form.controls['password'].hasError('hasCapitalCase') ||
+                      _form.controls['password'].hasError('hasSmallCase') ||
+                      _form.controls['password'].hasError('hasSpecialCharacters')
+                      ">
+                {{
+                _form.controls['password'].hasError('minlength')      ? 'Please Enter Minimum 6 Characters' :
+                _form.controls['password'].hasError('hasNumber')      ? 'Please Enter at least 1 number!' :
+                _form.controls['password'].hasError('hasCapitalCase') ? 'Please Enter at least 1 Letter in Capital Case!' :
+                _form.controls['password'].hasError('hasSmallCase')   ? 'Please Enter at least 1 Letter in Small Case!' : 
+                    'Please Enter at least 1 Special Character!'
+                }}
+              </span>
+            </mat-error>
+        </mat-form-field>        
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" placeholder="Confirm Password" formControlName="passwordConfirm" maxlength="18" minlength="6" required >
+             <mat-error *ngIf="_form.controls['passwordConfirm'].errors">
+              <span class="text-danger" *ngIf="_form.controls['passwordConfirm'].hasError('minlength') || 
+                      _form.controls['passwordConfirm'].hasError('hasNumber') || 
+                      _form.controls['passwordConfirm'].hasError('hasCapitalCase') ||
+                      _form.controls['passwordConfirm'].hasError('hasSmallCase') ||
+                      _form.controls['passwordConfirm'].hasError('hasSpecialCharacters') ||
+                      _form.controls['passwordConfirm'].hasError('confirmedValidator') 
+                      ">
+                {{
+                _form.controls['passwordConfirm'].hasError('confirmedValidator') ? 'Password doesnt match.' :
+                _form.controls['passwordConfirm'].hasError('minlength')          ? 'Please Enter Minimum 6 Characters' :
+                _form.controls['passwordConfirm'].hasError('hasNumber')          ? 'Please Enter at least 1 number!' :
+                _form.controls['passwordConfirm'].hasError('hasCapitalCase')     ? 'Please Enter at least 1 Letter in Capital Case!' :
+                _form.controls['passwordConfirm'].hasError('hasSmallCase')       ? 'Please Enter at least 1 Letter in Small Case!' : 
+                    'Please Enter at least 1 Special Character!'
+                }}
+              </span>
+            </mat-error>
+          
+        </mat-form-field>        
+
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" required >
+                <mat-option *ngFor="let role of roles" [value]="role._id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="_form.get('role')?.errors?.['required']">
+                Role required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="d-flex">
+            <mat-radio-group aria-label="Select an option" formControlName="enabled" color="primary" >
+              <mat-radio-button [value]="true"  >Enabled</mat-radio-button>
+              <mat-radio-button [value]="false" >Disabled</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div><hr></div>
+
+        <div class="d-flex justify-content-between">
+
+            <button mat-raised-button extended color="primary" class="submit-button" aria-label="Sign in" [disabled]="_form.invalid" *ngIf="!loading" >
+                Send
+            </button>
+
+            <button mat-raised-button extended color="primary" aria-label="Loading..." disabled *ngIf="loading" >
+                Loading...
+            </button>
+
+            <button mat-raised-button (click)="close()" >Cancel</button>
+        </div>
+
+    </form>
+
+</div>

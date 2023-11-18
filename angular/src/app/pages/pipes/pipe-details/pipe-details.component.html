@@ -1,0 +1,40 @@
+
+<div class=" details p-5">
+
+    <h5 class="mb-5">Details</h5>
+
+    <div>Client: {{title}}</div>
+
+    <hr>
+
+    <form>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Action</label>
+            <select class="form-control" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">address</label>
+            <input type="text" class="form-control" id="address" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Number" class="form-label">Number</label>
+            <input type="text" class="form-control" id="Number">
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-danger" (click)="close()" >Cancel</a>
+        </div>
+
+    </form>
+
+</div>

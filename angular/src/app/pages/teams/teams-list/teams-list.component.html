@@ -1,0 +1,66 @@
+<mat-drawer-container class="" autosize >
+
+
+    <mat-drawer #drawer class="" mode="over" >
+        <router-outlet></router-outlet>
+    </mat-drawer>
+
+
+    <div class="content">
+        
+        <table mat-table [dataSource]="data">
+
+            <!-- Id Column -->
+            <ng-container matColumnDef="_id">
+                <th mat-header-cell *matHeaderCellDef> Id. </th>
+                <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+            
+            <!-- enabled Column -->
+            <ng-container matColumnDef="enabled">
+                <th mat-header-cell *matHeaderCellDef> Enabled </th>
+                <td mat-cell *matCellDef="let element"> 
+
+                    <button mat-icon-button color="warn" *ngIf="!element.enabled" aria-label="Enable">
+                        <mat-icon>close</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" *ngIf="element.enabled" aria-label="Disable">
+                        <mat-icon>done</mat-icon>
+                    </button>
+
+                </td>
+            </ng-container>
+
+            <!-- edit Column -->
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Edit </th>
+                <td mat-cell *matCellDef="let element"> 
+
+                    <button mat-icon-button color="primary" aria-label="Edit" (click)="edit(element._id)" >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+    </div>
+
+
+    <button mat-fab color="primary" aria-label="new" class="new" (click)="new()" >
+        <mat-icon>add</mat-icon>
+    </button>
+
+
+</mat-drawer-container>

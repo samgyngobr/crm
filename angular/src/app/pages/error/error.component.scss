@@ -1,0 +1,13 @@
+app-error
+{
+    display: flex;
+    min-height: 100vh !important;
+    flex-direction: column;
+    place-content: center;
+    padding: 1rem;
+
+    .card 
+    {
+        margin-bottom: 200px;
+    }
+}

@@ -1,0 +1,40 @@
+
+<div class="sidebar-wrapper">
+
+
+    <div class="profile-header">
+
+        <div class="profile-img">
+            <img src="/assets/img/damir-bosnjak.jpg">
+        </div>
+
+        <a class="profile-user" [routerLink]="'/user'" >
+            <img *ngIf="image" src="{{image}}" alt="..." class="avatar border-gray">
+            <p *ngIf="name" class="title">{{name}}</p>
+        </a>
+
+    </div>
+
+    <!--
+    <div class="logo">
+        <a [routerLink]="" class="simple-text logo-mini">
+            <div class="logo-image-small">
+                <img src="assets/img/angular2-logo.png">
+            </div>
+        </a>
+        <a [routerLink]="" class="simple-text logo-normal">
+            Template
+        </a>
+    </div>
+    -->
+
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+
+</div>
