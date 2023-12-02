@@ -8,8 +8,8 @@
             <img src="/assets/img/damir-bosnjak.jpg">
         </div>
 
-        <a class="profile-user" [routerLink]="'/user'" >
-            <img *ngIf="image" src="{{image}}" alt="..." class="avatar border-gray">
+        <a class="profile-user" [routerLink]="'/profile'" >
+            <img *ngIf="image" src="/assets/img/{{image}}" alt="..." class="avatar border-gray">
             <p *ngIf="name" class="title">{{name}}</p>
         </a>
 

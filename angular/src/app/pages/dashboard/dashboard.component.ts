@@ -5,6 +5,7 @@ import { NotifyService } from '../../services/notify.service';
 
 @Component({
     selector: 'dashboard-cmp',
+    standalone: true,
     //moduleId: module.id,
     styleUrls: ['./dashboard.component.scss'],
     templateUrl: 'dashboard.component.html'

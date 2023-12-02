@@ -1,8 +1,14 @@
+import { CurrencyPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { LoadingService } from '../../services/loading.service';
 import { NotifyService } from '../../services/notify.service';
@@ -10,6 +16,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login',
+  standalone   : true,
+  imports      : [ NgIf, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   encapsulation : ViewEncapsulation.None

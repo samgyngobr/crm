@@ -6,9 +6,10 @@ import { ToastrModule } from "ngx-toastr";
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppProgressBarModule } from './components/app-progress-bar/app-progress-bar.module';
+import { LayoutsModule } from './layouts/layouts.module';
 
 import { AppComponent } from './app.component';
-import { AppRoutes } from './app.routing';
+//import { AppRoutes } from './app.routing';
 
 import { fakeBackendProvider } from './interceptors/fake-backend.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
@@ -20,12 +21,14 @@ import { AuthInterceptor } from './interceptors/authInterceptor.interceptor';
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes,{
-      useHash: false
-    }),
+    RouterModule,
+    //RouterModule.forRoot(AppRoutes,{
+    //  useHash: false
+    //}),
     ToastrModule.forRoot(),
     HttpClientModule,
-    AppProgressBarModule
+    AppProgressBarModule,
+    LayoutsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

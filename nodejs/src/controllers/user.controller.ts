@@ -13,7 +13,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     try
     {
         const users = await User
-            .find({ companyId : req.user.companyId }, { "enabled": 1, "email" : 1, "name": 1, "_id": 1 } )
+            .find({}, { "enabled": 1, "email" : 1, "name": 1, "_id": 1 } )
             .populate('role', { "name" : 1, "_id" : 1 })
             .sort('-createdAt')
             .exec();
