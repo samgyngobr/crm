@@ -32,6 +32,39 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 // ##################################################################################################################
 
+const getCurrentProfile = async (req: Request, res: Response) => {
+
+    try
+    {
+        var id = req.user._id;
+
+        // get user
+        const user = await User.findOne(
+                { _id: id }, 
+                { "email" : 1, "name": 1, "_id": 1, "createdAt" : 1, "updatedAt" : 1, "avatar" : 1 } 
+            )
+            .populate('role')
+            .exec();
+
+        if (!user)
+            throw Error( `User with id "${id}" not found.` );
+
+        return res.status(200).json({ 
+            data  : user,
+        });
+    }
+    catch( err : any )
+    {
+        return res.status(422).json({
+            error   : true,
+            message : err.message || err
+        });
+    }            
+};
+
+// ##################################################################################################################
+
+
 const getUserNew = async (req: Request, res: Response) => {
 
     try
@@ -109,8 +142,13 @@ const getUser = async (req: Request, res: Response) => {
         const { id } = req.params;
 
         // get user
-        const user = await User.findOne({ _id: id }).populate('role').exec();
-
+        const user = await User.findOne(
+            { _id: id }, 
+            { "enabled": 1, "email" : 1, "name": 1, "_id": 1, "createdAt" : 1, "updatedAt" : 1, "avatar" : 1 } 
+        )
+        .populate('role')
+        .exec();
+        
         if (!user)
             throw Error( `User with id "${id}" not found.` );
 
@@ -205,4 +243,4 @@ const deleteUser = async (req: Request, res: Response) => {
 // ##################################################################################################################
 
 
-export { createUser, deleteUser, getAllUsers, getUser, updateUser, getUserNew };
+export { createUser, deleteUser, getAllUsers, getUser, updateUser, getUserNew, getCurrentProfile };
