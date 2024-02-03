@@ -7,10 +7,6 @@
 
     <form [formGroup]="_form" (ngSubmit)="onSubmit()" class="d-flex flex-column" >
 
-        <div class="alert alert-danger" role="alert" *ngIf="error!=''" >
-          {{error}}
-        </div>
-
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
             <input matInput placeholder="Title" formControlName="title" required >

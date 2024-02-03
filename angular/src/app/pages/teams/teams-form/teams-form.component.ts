@@ -10,15 +10,12 @@ import { NotifyService } from '../../../services/notify.service';
 @Component({
   selector: 'app-teams-form',
   templateUrl: './teams-form.component.html',
-  styleUrls: ['./teams-form.component.scss'],
-  encapsulation : ViewEncapsulation.None
 })
 export class TeamsFormComponent implements OnInit, OnDestroy 
 {
 
   private _unsubscribeAll : Subject<void> = new Subject<void>();
   public  _form           : FormGroup;
-  public  error           : string  = "";
   public  loading         : boolean = false;
   public  id              : any     = "";
 
@@ -85,8 +82,6 @@ export class TeamsFormComponent implements OnInit, OnDestroy
 
   onSubmit()
   {
-    this.error = "";
-
     if (this._form.invalid)
       return
 

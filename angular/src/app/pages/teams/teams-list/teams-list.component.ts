@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy, ViewEncapsulation, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -27,12 +27,10 @@ export class TeamsListComponent implements OnInit, OnDestroy, AfterViewInit
      *
      * @param {TeamsService} _teamsService
      * @param {Router} _router
-     * @param {ChangeDetectorRef} _cd
      */
   constructor( 
     private _teamsService : TeamsService, 
     private _router       : Router,
-    private _cd           : ChangeDetectorRef
   )
   {
     this._unsubscribeAll = new Subject();
@@ -76,10 +74,9 @@ export class TeamsListComponent implements OnInit, OnDestroy, AfterViewInit
           {
             this.drawer.open();
           }
-          else if(!res) 
-            this.drawer.close();
-
-          this._cd.detectChanges();
+          else 
+            if(!res) 
+              this.drawer.close();
       });
   }
 
